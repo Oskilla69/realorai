@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* primary: #0b0d2d, secondary: #06feff, tertiary: #fb01ff */
+  --primary-color: #0b0d2d;
+  --secondary-color: #06feff;
+  --tertiary-color: #fb01ff;
+  /* 
+  --secondary-color: #fb01ff;
+  --tertiary-color: #06feff;
+   */
+
+  /* primary: #021704, secondary: #6eff7d, tertiary: #fe4ab7 */
+  /* --primary-color: #021704;
+  --secondary-color: #6eff7d;
+  --tertiary-color: #fe4ab7; */
+
+  /* primary: #100a34, secondary: #00e0ff, tertiary: #ff53a5 */
+  /* --primary-color: #100a34;
+  --secondary-color: #00e0ff;
+  --tertiary-color: #ff53a5; */
+
+  /* primary: #0b0d2d, secondary: #336cff, tertiary: #ff459e */
+  /* --primary-color: #0b0d2d;
+  --secondary-color: #336cff;
+  --tertiary-color: #ff459e; */
+}
+
+.primary-background {
+  background-color: var(--primary-color);
+}
+.primary-color {
+  color: var(--primary-color);
+}
+.secondary-background {
+  background-color: var(--secondary-color);
+}
+.secondary-color {
+  color: var(--secondary-color);
+}
+.tertiary-background {
+  background-color: var(--tertiary-color);
+}
+.tertiary-color {
+  color: var(--tertiary-color);
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
