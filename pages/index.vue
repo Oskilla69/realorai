@@ -1,15 +1,15 @@
 <template>
-  <div class="h-screen">
+  <div class=" h-full fixed w-full overflow-hidden box-content primary-background secondary-color">
     <div
-      class="flex flex-col justify-center align-center items-center h-full w-full primary-background secondary-color"
+      class="flex flex-col justify-center align-center items-center h-full w-full flex-grow"
     >
       <Banner></Banner>
       <!-- show two images based on what the prompt was. which one is AI generated vs. Real -->
       <!-- show one image and choose if it is Real or AI generated -->
       <ROAIImg :src="images[randomIndex].imageUrl" @go-next="randomImage" />
-      <div class="flex flex-row justify-between w-full px-2 pb-2">
-        <p class="text-2xl">Best score: {{ score }}</p>
-        <p class="text-2xl">Current score: {{ currScore }}</p>
+      <div class="fixed bottom-0 px-2 pb-1 flex flex-row justify-between w-full">
+        <p class="text-2xl">High score: {{ score }}</p>
+        <p class="text-2xl">Score: {{ currScore }}</p>
       </div>
       <Transition name="fade">
         <ResultsOverlay

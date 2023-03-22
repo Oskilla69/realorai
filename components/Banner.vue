@@ -1,9 +1,16 @@
 <template>
-  <div class="banner h-80 w-full flex flex-col align-start justify-start">
+  <div class="banner h-72 w-full flex flex-col align-start justify-start">
     <!-- <img class="h-full object-cover" src="~/assets/rolly_rocket.gif" /> -->
-    <h1 class="text-3xl font-bold underline">Real or AI? 🤖</h1>
-    <p class="text-xl">Is this image real or AI generated?</p>
-    <a class="mt-auto self-end" href="https://twitter.com/MrValenberg" target="_blank">Credit: Valenberg</a>
+    <div class="mx-auto mt-auto flex flex-col items-center">
+      <h1 class="text-3xl font-bold underline">Real or AI? 🤖</h1>
+      <p class="text-xl">Is this image real or AI generated?</p>
+    </div>
+    <a
+      class="mt-auto self-end"
+      href="https://twitter.com/MrValenberg"
+      target="_blank"
+      >Credit: Valenberg</a
+    >
   </div>
 </template>
 

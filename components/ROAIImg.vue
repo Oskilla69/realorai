@@ -3,9 +3,9 @@
     class="w-full h-full flex flex-col align-center justify-start md:flex-row"
   >
     <Transition @enter="onEnter" @leave="onLeave" :css="false">
-      <img v-if="show" class="w-full h-96 object-cover" :src="src" :alt="alt" />
+      <img v-if="show" class="w-full h-full object-cover md:h-full" :src="src" :alt="alt" />
     </Transition>
-    <div class="flex flex-row h-20 md:h-full">
+    <!-- <div class="flex flex-row h-20 md:h-full">
       <div
         class="w-full secondary-background tertiary-color real-button"
         data-modal-target="defaultModal"
@@ -22,7 +22,7 @@
       >
         <h1 class="text-3xl font-bold underline w-full">AI</h1>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script setup lang="ts">
