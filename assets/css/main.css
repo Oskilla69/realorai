@@ -49,3 +49,8 @@
 .overlay {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+.text-outline {
+  text-shadow: -2px 2px 0 var(--primary-color), 2px 2px 0 var(--primary-color),
+    2px -2px 0 var(--primary-color), -2px -2px 0 var(--primary-color);
+}

@@ -1,13 +1,17 @@
 <template>
-  <div
-    class="w-full h-full flex flex-col align-center justify-start md:flex-row"
-  >
-    <Transition @enter="onEnter" @leave="onLeave" :css="false">
-      <img v-if="show" class="w-full h-full object-cover md:h-full" :src="src" :alt="alt" />
-    </Transition>
-    <!-- <div class="flex flex-row h-20 md:h-full">
+  <div class="flex flex-col align-center justify-start w-full">
+    <!-- <div
+      class="w-full secondary-background tertiary-color real-button hidden md:inline"
+      data-modal-target="defaultModal"
+      data-modal-toggle="defaultModal"
+      @click="() => emits('goNext', true)"
+    >
+      <h1 class="text-3xl font-bold underline w-full">Real</h1>
+    </div> -->
+
+    <div class="flex-row h-14 flex">
       <div
-        class="w-full secondary-background tertiary-color real-button"
+        class="w-full h-full secondary-background tertiary-color real-button"
         data-modal-target="defaultModal"
         data-modal-toggle="defaultModal"
         @click="() => emits('goNext', true)"
@@ -15,23 +19,52 @@
         <h1 class="text-3xl font-bold underline w-full">Real</h1>
       </div>
       <div
-        class="w-full tertiary-background ai-button"
+        class="w-full h-full tertiary-background ai-button"
         data-modal-target="defaultModal"
         data-modal-toggle="defaultModal"
         @click="emits('goNext', false)"
       >
         <h1 class="text-3xl font-bold underline w-full">AI</h1>
       </div>
-    </div> -->
+    </div>
+    <Transition class="w-full" @enter="onEnter" @leave="onLeave" :css="false">
+      <!-- <img
+        v-if="show"
+        class="w-full h-full object-cover"
+        :src="src"
+        :alt="alt"
+      /> -->
+      <div id="dragon-container" class="w-full h-full"></div>
+    </Transition>
   </div>
 </template>
 <script setup lang="ts">
 import gsap from "gsap";
+import OpenSeaDragon from "openseadragon";
 interface Props {
   src: string;
   alt?: string;
 }
-const show = useState('showImg', () => true)
+const viewer = ref();
+onMounted(() => {
+  viewer.value = OpenSeaDragon({
+    id: "dragon-container",
+    prefixUrl: "https://openseadragon.github.io/openseadragon/images/",
+    // prefixUrl: "../assets/icons/",
+    // zoomInButton: "add_icon.svg",
+    // zoomOutButton: "remove_icon.svg",
+    // homeButton: "home_icon.svg",
+    // fullPageButton: "zoom_icon.svg",
+    showNavigator: true,
+    navigatorAutoFade: false,
+    constrainDuringPan: true,
+    tileSources: {
+      type: "image",
+      url: props.src,
+    },
+  });
+});
+const show = useState("showImg", () => true);
 const props = withDefaults(defineProps<Props>(), {
   alt: "",
 });
@@ -40,6 +73,10 @@ watch(
   () => props.src,
   (newVal) => {
     show.value = false;
+    viewer.value.open({
+      type: "image",
+      url: newVal,
+    });
     setTimeout(() => {
       show.value = true;
     }, 250);
@@ -69,7 +106,7 @@ function onLeave(el: HTMLElement, done: () => void) {
     scaleY: 1,
     x: 200,
     ease: "power4.out",
-    onComplete: done
+    onComplete: done,
   });
   // gsap.to(el, {
   //   duration: 0.2,
@@ -85,5 +122,8 @@ function onLeave(el: HTMLElement, done: () => void) {
 }
 .real-button:active {
   filter: brightness(75%);
+}
+.openseadragon-container {
+  border-color: transparent;
 }
 </style>

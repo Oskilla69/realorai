@@ -51,14 +51,14 @@
             class="st0"
             stroke="#fff"
             stroke-width="10"
-            points="44,40  77,77  44,114 "
+            points="44,40  77,77  43,114 "
             style="stroke-dasharray: 100px, 100px; stroke-dashoffset: 200px"
           />
           <polyline
             class="st0"
             stroke="#fff"
             stroke-width="10"
-            points="110,40  77,77  112,114 "
+            points="110,40  77,77  111,114 "
             style="stroke-dasharray: 100px, 100px; stroke-dashoffset: 200px"
           />
         </g>

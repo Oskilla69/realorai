@@ -14,7 +14,9 @@
     "tailwindcss": "^3.2.7"
   },
   "dependencies": {
+    "@types/openseadragon": "^3.0.5",
     "gsap": "^3.11.5",
-    "interactjs": "^1.10.17"
+    "interactjs": "^1.10.17",
+    "openseadragon": "^4.0.0"
   }
 }
