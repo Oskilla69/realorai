@@ -9,4 +9,29 @@ export default defineNuxtConfig({
     },
   },
   css: ["@/assets/css/main.css"],
+  modules: [
+    // pinia plugin
+    "@pinia/nuxt",
+  ],
+
+  imports: {
+    dirs: ["./stores"],
+  },
+
+  pinia: {
+    autoImports: ["defineStore", "acceptHMRUpdate"],
+  },
+  hotMiddleware: {
+    client: {
+      overlay: false,
+    },
+  },
+  runtimeConfig: {
+    supabaseURL: process.env.SUPABASE_URL,
+    supabasePublicKey: process.env.SUPABASE_PUBLIC_KEY,
+    public: {
+      supabaseURL: process.env.SUPABASE_URL,
+      supabasePublicKey: process.env.SUPABASE_PUBLIC_KEY,
+    },
+  },
 });

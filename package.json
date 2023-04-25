@@ -14,9 +14,12 @@
     "tailwindcss": "^3.2.7"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.4.9",
+    "@supabase/supabase-js": "^2.21.0",
     "@types/openseadragon": "^3.0.5",
     "gsap": "^3.11.5",
     "interactjs": "^1.10.17",
-    "openseadragon": "^4.0.0"
+    "openseadragon": "^4.0.0",
+    "pinia": "^2.0.35"
   }
 }

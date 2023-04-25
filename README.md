@@ -1,3 +1,8 @@
+Useful websites/info:
+- Bulk convert to .webp files
+https://anywebp.com/convert-to-webp.html
+- When importing data from csv to Supabase database, remember to remove " characters or it will give an error
+
 # Nuxt 3 Minimal Starter
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.

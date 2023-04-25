@@ -14,7 +14,7 @@
         class="w-full h-full secondary-background tertiary-color real-button"
         data-modal-target="defaultModal"
         data-modal-toggle="defaultModal"
-        @click="() => emits('goNext', true)"
+        @click="() => emits('goNext', false)"
       >
         <h1 class="text-3xl font-bold underline w-full">Real</h1>
       </div>
@@ -22,7 +22,7 @@
         class="w-full h-full tertiary-background ai-button"
         data-modal-target="defaultModal"
         data-modal-toggle="defaultModal"
-        @click="emits('goNext', false)"
+        @click="emits('goNext', true)"
       >
         <h1 class="text-3xl font-bold underline w-full">AI</h1>
       </div>
