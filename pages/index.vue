@@ -2,7 +2,6 @@
   <PageWrapper>
     <Aidle banner-size="full">
       <template #title-slot>
-        <h1>heyhey: {{ envVal }}</h1>
         <h1>URL: {{ url }}</h1>
         <h1>Public URL: {{ publicUrl }}</h1>
         <div class="w-full flex justify-center mt-20">
@@ -27,7 +26,6 @@
 </template>
 
 <script setup lang="ts">
-const envVal = process.env;
 const url = useRuntimeConfig().supabasePublicKey;
 const publicUrl = useRuntimeConfig().public.supabasePublicKey;
 </script>
