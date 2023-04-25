@@ -27,8 +27,6 @@
 </template>
 
 <script setup lang="ts">
-console.log(process);
-
 const url = useRuntimeConfig().supabasePublicKey;
 const publicUrl = useRuntimeConfig().public.supabasePublicKey;
 </script>
