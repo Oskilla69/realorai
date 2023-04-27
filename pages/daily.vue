@@ -6,11 +6,7 @@
       <div class="w-full h-full flex justify-center">
         <ROAIImg
           class="h-full w-full md:w-3/4 md:h-2/3 md:absolute lg:w-2/3 lg:h-2/3 md:bottom-0"
-          :src="
-            supabase.supabase.storage
-              .from('images')
-              .getPublicUrl(currImageData.image).data.publicUrl
-          "
+          :src="currImageData['image_url']"
           @go-next="randomImage"
         />
       </div>
@@ -52,6 +48,7 @@ const currImageData = ref();
 const { data, error } = await supabase.supabase.rpc("get_random_image");
 currImageData.value = data[0];
 
+// get the size of the image
 const usedQueue: string[] = [];
 async function randomImage(isAI: boolean) {
   prevImageData.value = currImageData.value;
