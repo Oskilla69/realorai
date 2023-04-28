@@ -1,3 +1,4 @@
+Want to play with the website? Go to https://aidle.vercel.app/
 Useful websites/info:
 - Bulk convert to .webp files
 https://anywebp.com/convert-to-webp.html
