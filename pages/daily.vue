@@ -1,5 +1,26 @@
 <template>
   <PageWrapper>
+    <Transition name="slide-fade">
+      <HowToPlayModal
+        v-if="displayModal"
+        ref="howToPlayModal"
+        title="How to play"
+        :is-open="true"
+        @is-open="(display) => (displayModal = display)"
+      >
+        <p>Guess whether the image is AI generated or not.</p>
+
+        <div class="flex-row flex gap-1 items-center">
+          <p>Get 3 out of 5 right to keep your daily streak alive.</p>
+          <img src="~/assets/sitt.webp" />
+        </div>
+        <p>Come back everyday for 5 new images.</p>
+        <div class="flex-row flex gap-1 items-center">
+          <p>Good luck!</p>
+          <img src="~/assets/salutt.webp" />
+        </div>
+      </HowToPlayModal>
+    </Transition>
     <Aidle>
       <!-- show two images based on what the prompt was. which one is AI generated vs. Real -->
       <!-- show one image and choose if it is Real or AI generated -->
@@ -11,7 +32,7 @@
         />
       </div>
       <div class="fixed top-0 px-2 pb-1 flex flex-row justify-between w-full">
-        <p ref="highScoreRef" class="text-2xl">High score: {{ score }}</p>
+        <p ref="highScoreRef" class="text-2xl">Current streak: {{ score }}</p>
         <p ref="scoreRef" class="text-2xl">Score: {{ currScore }}</p>
       </div>
       <Transition name="fade">
@@ -31,7 +52,7 @@
 import gsap, { Sine } from "gsap";
 import { useSupabase } from "~~/stores/supabase";
 
-// color schemes:
+const displayModal = useState("displayModal", () => false);
 const display = useState("display", () => false);
 const correct = useState("correct", () => false);
 const score = useCookie<number>("numCorrect");
@@ -45,6 +66,9 @@ const prevImageData = ref();
 const currImageData = ref();
 // get a random row from image_data table
 
+onMounted(() => {
+  displayModal.value = true;
+});
 const { data, error } = await supabase.supabase.rpc("get_random_image");
 currImageData.value = data[0];
 
@@ -80,25 +104,15 @@ async function randomImage(isAI: boolean) {
   }
   // get a random row from image_data table
   // if there is a prevImage, pass it in to the rpc call
-  // const { data, error } = await supabase.supabase.rpc('get_random_image', {
-  //   exclude_image: prevImageData.value.image
-  // });
-  // console.log(data, error);
-
-  // currImageData.value = data[0];
+  const { data, error } = await supabase.supabase.rpc("get_random_image", {
+    exclude_image: prevImageData.value.image,
+  });
+  currImageData.value = data[0];
 }
 </script>
 
 <style scoped>
 .banner {
   position: static;
-}
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.4s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

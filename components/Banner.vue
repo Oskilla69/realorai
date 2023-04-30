@@ -18,7 +18,7 @@
 
 <style scoped>
 .banner {
-  background: url("~/assets/rolly_rocket.gif");
+  background: url("~/assets/rolly_rocket.png");
   background-size: cover;
   filter: brightness(85%);
   /* background-position: center; */

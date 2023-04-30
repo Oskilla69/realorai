@@ -11,15 +11,16 @@
     >
       <img
         class="banner-img top-0 left-0 w-full h-full"
-        src="~/assets/rolly_rocket.gif"
+        src="~/assets/rolly_rocket.png"
       />
       <div
         class="absolute top-24 self-center flex flex-col items-center md:mt-8"
       >
         <h1 class="text-3xl font-bold underline text-outline">
-          Real or AI? 🤖
+          A.I.dle
         </h1>
-        <p class="text-xl text-outline">Is this image real or AI generated?</p>
+        <!-- <p class="text-xl text-outline">Is this image real or AI generated?</p> -->
+        <p class="text-xl text-outline">Can you tell which images are AI generated?</p>
         <slot name="title-slot"></slot>
       </div>
       <a
@@ -63,7 +64,7 @@ const props = withDefaults(defineProps<Props>(), {
 /* banner if screen width >= 768 */
 @media screen and (min-width: 768px) {
   .banner {
-    background: url("~/assets/rolly_rocket.gif");
+    background: url("~/assets/rolly_rocket.png");
     background-size: cover;
     filter: brightness(85%);
     /* background-position: center; */
@@ -75,7 +76,7 @@ const props = withDefaults(defineProps<Props>(), {
 /* banner if screen width < 768 */
 @media screen and (max-width: 767px) {
   .banner {
-    background: url("~/assets/rolly_rocket.gif");
+    background: url("~/assets/rolly_rocket.png");
     background-size: cover;
     filter: brightness(85%);
     /* background-position: center; */

@@ -1,14 +1,5 @@
 <template>
   <div class="flex flex-col align-center justify-start w-full">
-    <!-- <div
-      class="w-full secondary-background tertiary-color real-button hidden md:inline"
-      data-modal-target="defaultModal"
-      data-modal-toggle="defaultModal"
-      @click="() => emits('goNext', true)"
-    >
-      <h1 class="text-3xl font-bold underline w-full">Real</h1>
-    </div> -->
-
     <div class="flex-row h-14 flex">
       <div
         class="w-full h-full secondary-background tertiary-color real-button"
@@ -27,7 +18,7 @@
         <h1 class="text-3xl font-bold underline w-full">AI</h1>
       </div>
     </div>
-    <Transition class="w-full" @enter="onEnter" @leave="onLeave" :css="false">
+    <Transition @enter="onEnter" @leave="onLeave">
       <!-- <img
         v-if="show"
         class="w-full h-full object-cover"
