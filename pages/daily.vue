@@ -41,7 +41,6 @@
           class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 md:h-full"
           :img-data="prevImageData"
           :correct="correct"
-          @click="display = false"
         ></ResultsOverlay>
       </Transition>
     </Aidle>
@@ -108,6 +107,17 @@ async function randomImage(isAI: boolean) {
     exclude_image: prevImageData.value.image,
   });
   currImageData.value = data[0];
+}
+
+function updateCorrectCount(image: string, correct: boolean) {
+  if (correct) {
+    supabase.supabase.from("image_data").update({ correct }).eq("image", image);
+  } else {
+    supabase.supabase
+      .from("image_data")
+      .update({ incorrect: true })
+      .eq("image", image);
+  }
 }
 </script>
 

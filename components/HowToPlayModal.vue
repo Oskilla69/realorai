@@ -51,7 +51,4 @@ const emits = defineEmits(["isOpen"]);
 function closeModal() {
   emits("isOpen", false);
 }
-function test(str: string) {
-  console.log(str);
-}
 </script>
