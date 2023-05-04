@@ -12,8 +12,7 @@
       >
         <div class="px-4 pt-3 flex flex-row items-center justify-between">
           <div class="flex flex-row items-center gap-2">
-            <h3 class="text-lg font-medium secondary-color">{{ title }}</h3>
-            <img src="~/assets/notee.webp" />
+            <slot name="title"></slot>
           </div>
           <button @click="closeModal">
             <svg
@@ -43,7 +42,6 @@
 
 <script setup lang="ts">
 interface Props {
-  title: string;
   isOpen: boolean;
 }
 const props = defineProps<Props>();

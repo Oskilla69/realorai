@@ -81,3 +81,7 @@ durations and timing functions.
   transform: translateY(20px);
   opacity: 0;
 }
+
+.break-word {
+  overflow-wrap: break-word;
+}

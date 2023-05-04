@@ -16,11 +16,6 @@
       <div
         class="absolute top-24 self-center flex flex-col items-center md:mt-8"
       >
-        <h1 class="text-3xl font-bold underline text-outline">
-          A.I.dle
-        </h1>
-        <!-- <p class="text-xl text-outline">Is this image real or AI generated?</p> -->
-        <p class="text-xl text-outline">Can you tell which images are AI generated?</p>
         <slot name="title-slot"></slot>
       </div>
       <a

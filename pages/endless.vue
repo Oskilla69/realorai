@@ -1,13 +1,16 @@
 <template>
   <PageWrapper>
     <Transition name="slide-fade">
-      <HowToPlayModal
+      <AidleModal
         v-if="displayModal"
         ref="howToPlayModal"
-        title="How to play"
         :is-open="true"
         @is-open="(display) => (displayModal = display)"
       >
+        <template #title>
+          <h3 class="text-lg font-medium secondary-color">How to play</h3>
+          <img src="~/assets/notee.webp" />
+        </template>
         <div class="flex flex-row gap-1 items-end">
           <p>Guess whether the image is AI generated or not.</p>
           <img src="~/assets/hmjj.webp" />
@@ -16,11 +19,15 @@
           <p>Good luck!</p>
           <img src="~/assets/salutt.webp" />
         </div>
-      </HowToPlayModal>
+      </AidleModal>
     </Transition>
     <Aidle>
       <!-- show two images based on what the prompt was. which one is AI generated vs. Real -->
       <!-- show one image and choose if it is Real or AI generated -->
+      <template #title-slot>
+        <h1 class="text-3xl font-bold text-outline">A.I.dle</h1>
+        <p class="text-xl text-outline">Is this image AI generated?</p>
+      </template>
       <div class="w-full h-full flex justify-center">
         <ROAIImg
           class="h-full w-full md:w-3/4 md:h-2/3 md:absolute lg:w-2/3 lg:h-2/3 md:bottom-0"
@@ -38,7 +45,19 @@
           class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 md:h-full"
           :img-data="prevImageData"
           :correct="correct"
-          @click="display = false"
+          :redirect="true"
+          @close-modal="
+            () => {
+              display = false;
+              if (!correct) {
+                $router.push({
+                  name: 'results',
+                  params: { score: currScore },
+                  state: { score: currScore },
+                });
+              }
+            }
+          "
         ></ResultsOverlay>
       </Transition>
     </Aidle>
@@ -55,7 +74,6 @@ const correct = useState("correct", () => false);
 const score = useCookie<number>("numCorrect");
 score.value = score.value || 0;
 const currScore = useState<number>("currScore", () => 0);
-
 const scoreRef = ref();
 const highScoreRef = ref();
 const supabase = useSupabase();

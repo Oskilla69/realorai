@@ -2,6 +2,10 @@
   <PageWrapper>
     <Aidle banner-size="full">
       <template #title-slot>
+        <h1 class="text-3xl font-bold text-outline">A.I.dle</h1>
+        <p class="text-xl text-outline">
+          Can you tell which images are AI generated?
+        </p>
         <div class="w-full flex justify-center mt-20">
           <div class="flex flex-row gap-4">
             <button
