@@ -17,9 +17,11 @@
     "@pinia/nuxt": "^0.4.9",
     "@supabase/supabase-js": "^2.21.0",
     "@types/openseadragon": "^3.0.5",
+    "chart.js": "^4.3.0",
     "gsap": "^3.11.5",
     "interactjs": "^1.10.17",
     "openseadragon": "^4.0.0",
-    "pinia": "^2.0.35"
+    "pinia": "^2.0.35",
+    "vue-chartjs": "^5.2.0"
   }
 }

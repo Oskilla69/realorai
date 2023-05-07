@@ -4,7 +4,6 @@
       <AidleModal
         v-if="displayModal"
         ref="howToPlayModal"
-        :is-open="true"
         @is-open="(display) => (displayModal = display)"
       >
         <template #title>

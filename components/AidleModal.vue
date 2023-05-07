@@ -41,10 +41,6 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
-  isOpen: boolean;
-}
-const props = defineProps<Props>();
 const emits = defineEmits(["isOpen"]);
 function closeModal() {
   emits("isOpen", false);

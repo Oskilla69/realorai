@@ -2,9 +2,45 @@
   <PageWrapper>
     <Transition name="slide-fade">
       <AidleModal
+        v-if="displayResultsModal"
+        @is-open="(display) => (displayResultsModal = display)"
+      >
+        <div class="flex flex-col items-center">
+          <p class="font-bold">Statistics</p>
+          <Bar
+            v-if="scoreDistributions"
+            :options="{
+              indexAxis: 'y',
+              backgroundColor: 'red',
+              scales: {
+                y: {
+                  ticks: {
+                    color: 'red',
+                  },
+                },
+                x: {
+                  ticks: {
+                    color: 'red',
+                  },
+                },
+              },
+            }"
+            :data="{
+              labels: Object.keys(scoreDistributions).reverse(),
+              datasets: [
+                {
+                  data: (Object.values(scoreDistributions).reverse()) as number[],
+                },
+              ],
+            }"
+          ></Bar>
+        </div>
+      </AidleModal>
+    </Transition>
+    <Transition name="slide-fade">
+      <AidleModal
         v-if="displayModal"
         ref="howToPlayModal"
-        :is-open="true"
         @is-open="(display) => (displayModal = display)"
       >
         <template #title>
@@ -22,6 +58,7 @@
           <p>Good luck!</p>
           <img src="~/assets/salutt.webp" />
         </div>
+        <p>{{ timeUntilNext }}</p>
       </AidleModal>
     </Transition>
     <Aidle>
@@ -30,6 +67,7 @@
 
       <template #title-slot>
         <h1 class="text-3xl font-bold text-outline">A.I.dle</h1>
+        <button @click="test">Hellooo</button>
         <!-- <p class="text-xl text-outline">Image n of 5.</p> -->
       </template>
       <div class="w-full h-full flex justify-center">
@@ -65,8 +103,22 @@
 <script setup lang="ts">
 import gsap, { Sine } from "gsap";
 import { useSupabase } from "~~/stores/supabase";
-
+import { Bar } from "vue-chartjs";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
+ChartJS.register(Title, Tooltip, BarElement, CategoryScale, LinearScale);
 const displayModal = useState("displayModal", () => false);
+const displayResultsModal = useState("displayResultsModal", () => false);
+async function test() {
+  displayResultsModal.value = true;
+  await getScoreDistributions();
+}
 const display = useState("display", () => false);
 const correct = useState("correct", () => false);
 const score = useCookie<number>("numCorrect");
@@ -78,17 +130,44 @@ const highScoreRef = ref();
 const supabase = useSupabase();
 const prevImageData = ref();
 const currImageData = ref();
-const breakdownDisplay = ref();
+const timeUntilNext = ref();
+const scoreDistributions = ref();
+const distance = ref();
+const breakdownDisplay = ref<{
+  0: number;
+  1: number;
+  2: number;
+  3: number;
+  4: number;
+  5: number;
+}>();
 // get a random row from image_data table
 
-onMounted(() => {
+onMounted(async () => {
+  distance.value = (await $fetch("/api/reset_time"))["body"];
+
+  setInterval(() => {
+    distance.value -= 1000;
+    if (distance.value < 0) {
+      $fetch("/api/reset_time").then((res) => {
+        distance.value = res["body"];
+      });
+    }
+    const hours = Math.floor(
+      (distance.value % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+    );
+    const minutes = Math.floor(
+      (distance.value % (1000 * 60 * 60)) / (1000 * 60),
+    );
+    const seconds = Math.floor((distance.value % (1000 * 60)) / 1000);
+    timeUntilNext.value = `${hours}h ${minutes}m ${seconds}s`;
+  }, 1000);
   displayModal.value = true;
 });
 const { data, error } = await supabase.supabase.rpc("get_random_image");
 currImageData.value = data[0];
 
 // get the size of the image
-const usedQueue: string[] = [];
 async function randomImage(isAI: boolean) {
   prevImageData.value = currImageData.value;
 
@@ -134,6 +213,25 @@ function updateCorrectCount(image: string, correct: boolean) {
       .update({ incorrect: true })
       .eq("image", image);
   }
+}
+
+async function getScoreDistributions() {
+  const userToken = useCookie<string>("userToken");
+  const { data, error } = await supabase.supabase.rpc("get_dailies", {
+    user_token: userToken.value,
+  });
+  console.log(data, error);
+
+  console.log(data[0], data[1], data[2], data[3], data[4], data[5]);
+  scoreDistributions.value = data;
+  scoreDistributions.value = {
+    0: 4,
+    1: 5,
+    2: 2,
+    3: 1,
+    4: 0,
+    5: 2,
+  };
 }
 </script>
 
